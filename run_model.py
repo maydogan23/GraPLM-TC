@@ -1,23 +1,11 @@
-# -*- coding: utf-8 -*-
-"""
-Kampanya orkestratörü (Windows/Linux). Bash scriptinin yerine geçer.
 
-Kullanım (grallm_kampanya klasörünün içinden):
-  python scripts/04_run_campaign.py            # her şeyi koşar
-  python scripts/04_run_campaign.py --phase 1  # sadece original koşullar
-  python scripts/04_run_campaign.py --phase 2  # sadece summary'ye bağımlı koşullar
-
-Kesintiye dayanıklıdır: results/runs.csv'de tamamlanmış koşuları atlar,
-kaldığı yerden devam eder.
-"""
 import argparse, os, subprocess, sys
 import pandas as pd
 
-SEEDS = [42, 43, 44, 45, 46]
 DATASETS = ['ttc3600', 'ttc4900']
 PHASE1 = ['original']
 PHASE2 = ['vertexcover', 'lead', 'tfidf', 'textrank', 'random0', 'random1', 'random2']
-PHASE3 = ['vc_b10', 'vc_b20', 'vc_b30', 'vc_b40']  # maxSize duyarlilik (R5.4)
+PHASE3 = ['vc_b10', 'vc_b20', 'vc_b30', 'vc_b40']  
 PHASE3_DATASETS = ['ttc3600']  # istenirse 'ttc4900' eklenebilir
 
 def done_runs():
@@ -33,7 +21,7 @@ def run(cmd):
     print('>>>', ' '.join(cmd), flush=True)
     r = subprocess.run(cmd)
     if r.returncode != 0:
-        print(f'HATA: komut basarisiz ({r.returncode}). Duzeltme icin ciktiyi paylasin.')
+        print(f'HATA: komut basarisiz ({r.returncode}).')
         sys.exit(r.returncode)
 
 def main():
