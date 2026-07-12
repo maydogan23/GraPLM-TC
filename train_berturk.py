@@ -1,15 +1,4 @@
-# -*- coding: utf-8 -*-
-"""
-BERTurk fine-tuning v2 — tanı ve kararlılık düzeltmeleri.
-Değişiklikler (v1'e göre):
-  - warmup (%10) + gradient clipping 1.0  -> ilk-adım kararsızlığına karşı
-  - adım bazlı loss loglama + NaN tespiti -> sorun anında görünür
-  - --smoke modu: 64 örnekte 30 adım overfit testi (~1 dk)
-  - ortam sürümleri başta yazdırılır
 
-ÖNCE ŞUNU KOŞUN ve çıktıyı paylaşın:
-  python scripts/03_train_berturk.py --dataset ttc3600 --condition original --seed 42 --smoke
-"""
 import argparse, os, time, json, random, math, sys
 import numpy as np
 import pandas as pd
